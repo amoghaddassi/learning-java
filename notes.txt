@@ -1,0 +1,59 @@
+Following: http://www-inst.eecs.berkeley.edu/~cs61b/fa14/book1/java.pdf
+
+Chapter 1: Java Overview
+	1.1: Basic Program Structure
+	- Java programs are collections of defintions (classes, functions, variables) which are grouped into classes.
+	- Dot notation is used to access definitions that are part of an object.
+	- In a method call, the function first evaluates the arguments in order, then calls the method on them.
+	- Executing a complete program means running the main method; sometimes there is no main method.
+	
+	1.2: Compilation and Execution
+	- Should put each class in a Java program in a seperate file <class-name>.java
+	- Compile the program using javac program.java
+	- Execute the program using java program
+		- The argument to java is the name of the class with the main method.
+	
+	1.3: Simple Values and Expressions
+	- Primitives: numbers, characters, booleans.
+	- Standard numeric operations: *, +, -, /, %
+		- Division by two integers is floor, while between two floats is exact.
+	- Standard numeric comparisons (<, >, <=, >=, !=, ==) and boolean operators (and: &&, or: ||, not: !)
+		- Precedence rules are often confusing so ok to use a lot of parantheses.
+		- && and || are short circuiting operators in the same fashion as in python.
+	- Strings:
+		- Double quotes enclose all strings.
+		- \n: newline, \t: tab
+		- + operator works for concatenation, and will convert other types to strings.
+	- Static Methods: A form abstraction:
+		- Static methods: class methods
+		- Non-static methods: instance methods
+		- Difference is that only instance methods can use instance attributes.
+		- Definition: A static T_r N (T_1 N_1, T_2 N_2, ...) {B}
+			- A: public (can be called anywhere in the program), private (can be called anywhere in the class).
+			- T_r: type of return value
+			- N: method name
+			- T_i, N_i: the type and name of the ith formal parameter.
+			- ex. public static int add(int double, double val2) {return val1+val2;}
+	
+	1.4: Conditionals
+	- if statements:
+		if (condition) expression <else expression> where the else is optional
+		- To do multiple things in a if statement, we can use block {} expressions, which can contain anynumber of expressions.
+	- Condtional expressions: C ? if:else where C is some boolean expression, if and else are expressions.
+	- Case analysis and the switch statement:
+	Can use traditional if statement:
+		if (condition) {}
+		else if (condition) {}
+		else
+		- The difference between python elif and java else if is that there are two seperate if statements in the java version, whereas elif funcitonality is built into python.
+	switch (variable) {
+		case value: {}
+		case value2: {}
+		...
+		default:
+	
+	1.5: Arrays from the command line
+	- The main method takes in a array of strings (String[] args).
+	- This means that if a java program is called like java Main "hi", args[0] will be bound to "hi".
+	- We can index into args directly from the main method, so we can take user input into the program.
+	- This can be referenced from the body of main, so we can create programs that take user input from the CLI			 
