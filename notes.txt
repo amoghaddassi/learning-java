@@ -56,4 +56,25 @@ Chapter 1: Java Overview
 	- The main method takes in a array of strings (String[] args).
 	- This means that if a java program is called like java Main "hi", args[0] will be bound to "hi".
 	- We can index into args directly from the main method, so we can take user input into the program.
-	- This can be referenced from the body of main, so we can create programs that take user input from the CLI			 
+	- This can be referenced from the body of main, so we can create programs that take user input from the CLI			
+	1.8: Variables and Assignment
+	- Variables and assigment are just methods of abstraction in programs.
+	- Variables are containers of values.
+	- In a right hand context the variable name refers to the value it contains.
+	- In a left hand context the variable refers to the container itself (for rebinding).
+	- Assignment in Java: Type var = value;
+		- Statically typed since variables have one type, leads to better programs.
+		- Opposite is dynamically typed languages, which allow variables to be rebound to diff. types.
+	
+	1.9: Repetition
+	- definite iteration: (for loop) when the loop is over a finite set.
+	- indefinite iteration: (while loop) when the loop terminates with some boolean condition.
+		- while loops check for a condition before each iteration.
+		- do {body} while (condition) or a do-while loop, checks the condition after each iteration.
+	
+	1.10: Creating Arrays
+	- T[] declares an array of type T. The definition is recursive so T[][] is an array of arrays of type T.
+	- Arrays are a reference type: 
+		- int[] A; means that A will always be a pointer to some integer array, or be the null pointer.
+		- int[] A = new int[100] means that A points to a 100 length array of 0s.
+		- int[] A = new int {3, 2, 1}; means that A is bound to the 3 el array [3, 2, 1]   

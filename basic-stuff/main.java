@@ -1,10 +1,9 @@
 class Main {
 	public static void main(String[] args) {
-		int res[] = new int[args.length];
-		for (int i = 0;i < args.length;i++) {
-			res[i]=Integer.parseInt(args[i]);
-		}
-		System.out.println(dist(res[0], res[1], res[2], res[3]));
+		int x0 = Integer.parseInt(args[0]);
+		int x1 = Integer.parseInt(args[1]);
+		System.out.println(comb(x0, x1));
+		System.out.println(fib(x0)); 
 	}
 
 	/**Computes the square of X */
@@ -25,5 +24,23 @@ class Main {
 			return 0;
 		else 
 			return -x;
+	}
+
+	/** Computes N! */
+	private static int fact(int n) {
+		if (n == 1) 
+			return 1;
+		else return n * fact(n-1);
+	}
+	
+	/** Computs N choose K */
+	private static int comb(int n, int k) {
+		return fact(n) / (fact(k) * fact(n-k));
+	}
+
+	/** Computes the Nth fibonacci number */
+	private static int fib(int n) {
+		if (n == 0 || n == 1) return n;
+		else return fib(n-1) + fib(n-2);
 	}
 }
