@@ -91,10 +91,3 @@ public class Planet {
 		StdDraw.picture(xxPos, yyPos, "images/"+imgFileName);
 	}
 }
-
-
-
-
-
-
-

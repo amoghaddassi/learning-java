@@ -35,7 +35,7 @@ public class NBody {
 		StdDraw.setScale(-radius, radius);
 		StdDraw.clear();
 		StdDraw.picture(0, 0, "images/starfield.jpg");
-
+		
 		for (Planet p: planets) {
 			p.draw();
 		}
