@@ -50,6 +50,7 @@ public class AListTest {
         L.addLast(3);
         L.addLast(4);
         L.removeFirst();
+        System.out.println(L.get(3));
         assert(L.get(3) == null);
     }
 
