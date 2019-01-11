@@ -1,9 +1,10 @@
 public class AList<key> {
     // TODO: Adjust capacity to meet memory specs of the project.
     // TODO: Make the underlying array circular (recommended by Hug).
-    private int capacity;
     private int size;
     private key[] items;
+    private int nextFirst;
+    private int nextLast;
 
     public AList() {
         capacity = 8;
