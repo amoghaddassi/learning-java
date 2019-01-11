@@ -1,17 +1,24 @@
 public class AList<key> {
-    private int size;
+    // TODO: Adjust capacity to meet memory specs of the project.
+    // TODO: Make the underlying array circular (recommended by Hug).
     private int capacity;
+    private int size;
     private key[] items;
 
     public AList() {
         capacity = 8;
-        items = (key[])new Object[8];
+        items = (key[])new Object[capacity];
         size = 0;
     }
 
     /** Doubles the size of the array and copies all current elements.*/
-    private void resize() {
-        capacity = capacity * 2;
+    private void resize(boolean increase_size) {
+        if (increase_size) {
+            capacity = capacity * 2;
+        } else {
+            capacity = capacity / 2;
+        }
+
         key[] temp = (key[])new Object[capacity];
         System.arraycopy(items, 0, temp, 0, items.length);
         items = temp;
@@ -22,7 +29,7 @@ public class AList<key> {
         // Resizes as necessary so there are available spaces to move the block.
         // NOTE: This shouldn't have to loop more than once under normal usage.
         while (destPos + length > capacity) {
-            resize();
+            resize(true);
         }
         key[] temp = (key[])new Object[capacity];
         System.arraycopy(items, srcPos, temp, destPos, length);
@@ -32,7 +39,7 @@ public class AList<key> {
     /** Adds item X to the front of the list.*/
     public void addFirst(key x) {
         if (size == capacity) {
-            resize();
+            resize(true);
         }
         move(0, 1, size);
         items[0] = x;
@@ -43,7 +50,7 @@ public class AList<key> {
     /** Adds item X to the back of the list.*/
     public void addLast(key x) {
         if (size == capacity) {
-            resize();
+            resize(true);
         }
         items[size] = x;
         size++;
