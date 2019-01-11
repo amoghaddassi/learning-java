@@ -1,8 +1,6 @@
+/** A SLList */
 public class SLList {
-	/**
-	 * Naked recursive structure SLList will wrap
-	 * Advantage over directly using IntNode class by storing meta info and methods about the list.
-	 */
+
 	private static class IntNode {
 		public int item;
 		public IntNode next;
@@ -127,4 +125,4 @@ public class SLList {
 		}
 		return true;
 	}
-} 
+}
