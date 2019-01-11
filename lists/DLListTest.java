@@ -15,8 +15,8 @@ public class DLListTest {
     public void getItem() {
         DLList<Integer> L = new DLList<>();
         L.addMany(new Integer[]{1,2,3,1,3,234,1,3,2});
-        assert(3 == L.getItem(2));
-        assert(1 == L.getItem(6));
+        assert(3 == L.get(2));
+        assert(1 == L.get(6));
     }
 
     @Test
@@ -25,7 +25,7 @@ public class DLListTest {
         L.addFirst(1);
         L.addFirst(2);
         L.addFirst(3);
-        assert(3 == L.getItem(0));
+        assert(3 == L.get(0));
     }
 
     @Test
@@ -34,7 +34,7 @@ public class DLListTest {
         L.addLast(1);
         L.addLast(2);
         L.addLast(3);
-        assert(1 == L.getItem(0));
+        assert(1 == L.get(0));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class DLListTest {
         DLList<Integer> L = new DLList<>();
         L.addMany(new Integer[]{1,2,3,1,3,234,1,3,2});
         L.removeFirst();
-        assert(2 == L.getItem(0));
+        assert(2 == L.get(0));
     }
 
     @Test
@@ -50,7 +50,7 @@ public class DLListTest {
         DLList<Integer> L = new DLList<>();
         L.addMany(new Integer[]{1,2,3,1,3,234,1,3,2});
         L.removeLast();
-        assert(3 == L.getItem(L.size() - 1));
+        assert(3 == L.get(L.size() - 1));
     }
 
     @Test

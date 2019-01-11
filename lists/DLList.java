@@ -11,15 +11,14 @@ public class DLList<key> {
         }
     }
 
-    private Node head;
-    private Node tail;
+    private Node sentinel;
     private int size;
 
     public DLList() {
         size = 0;
-        head = new Node(null, null, null);
-        tail = new Node(head, null, null);
-        head.next = tail;
+        sentinel = new Node(null, null, null);
+        sentinel.next = sentinel;
+        sentinel.prev = sentinel;
     }
 
     /** Returns the size of the list.*/
@@ -29,15 +28,15 @@ public class DLList<key> {
 
     /** Adds X to the front of the list.*/
     public void addFirst(key x) {
-        head.next = new Node(head, head.next, x);
-        head.next.next.prev = head.next;
+        sentinel.next = new Node(sentinel, sentinel.next, x);
+        sentinel.next.next.prev = sentinel.next;
         size++;
     }
 
     /** Adds X to the back of the list.*/
     public void addLast(key x) {
-        tail.prev = new Node(tail.prev, tail, x);
-        tail.prev.prev.next = tail.prev;
+        sentinel.prev = new Node(sentinel.prev, sentinel, x);
+        sentinel.prev.prev.next = sentinel.prev;
         size++;
     }
 
@@ -49,21 +48,25 @@ public class DLList<key> {
     }
 
     /** Removes the first item in the list.*/
-    public void removeFirst() {
-        head.next = head.next.next;
-        head.next.prev = head;
+    public key removeFirst() {
+        key item = sentinel.next.item;
+        sentinel.next = sentinel.next.next;
+        sentinel.next.prev = sentinel;
         size--;
+        return item;
     }
 
     /** Removes the last element in the list.*/
-    public void removeLast() {
-        tail.prev = tail.prev.prev;
-        tail.prev.next = tail;
+    public key removeLast() {
+        key item = sentinel.prev.item;
+        sentinel.prev = sentinel.prev.prev;
+        sentinel.prev.next = sentinel;
         size--;
+        return item;
     }
 
     public boolean isEmpty() {
-        return (tail.prev.prev == null) && (head.next.next == null);
+        return (sentinel.next == sentinel.prev);
     }
 
     private key getRecursiveFromTail(Node n, int i) {
@@ -85,13 +88,13 @@ public class DLList<key> {
     public key getRecursive(int i) {
         assert(i < size());
         if (i > size() / 2) {
-            return getRecursiveFromTail(tail.prev, size()-i-1);
+            return getRecursiveFromTail(sentinel.prev, size()-i-1);
         }
-        return getRecursiveFromHead(head.next, i);
+        return getRecursiveFromHead(sentinel.next, i);
     }
 
     private key getFromTail(int i) {
-        Node p = this.tail.prev;
+        Node p = sentinel.prev;
         while (i != 0) {
             p = p.prev;
             i--;
@@ -100,7 +103,7 @@ public class DLList<key> {
     }
 
     private key getFromHead(int i) {
-        Node p = this.head.next;
+        Node p = sentinel.next;
         while (i != 0) {
             p = p.next;
             i--;
@@ -115,4 +118,19 @@ public class DLList<key> {
         }
         return getFromHead(i);
     }
+
+    public String toString() {
+        String res = "";
+        Node p = sentinel.next;
+        while (p.next != sentinel) {
+            res += p.item + " ";
+            p = p.next;
+        }
+        return res;
+    }
+
+    public void printDeque() {
+        System.out.println(toString());
+    }
+
 }
