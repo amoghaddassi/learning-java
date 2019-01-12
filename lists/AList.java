@@ -1,12 +1,9 @@
 public class AList<key> {
     // TODO: Adjust capacity to meet memory specs of the project.
-    // TODO: Make the underlying array circular (recommended by Hug).
     private int size;
     private key[] items;
     private int nextFirst;
     private int nextLast;
-    private int first;
-    private int last;
 
     public AList() {
         items = (key[])new Object[8];
@@ -15,21 +12,39 @@ public class AList<key> {
         nextLast = 4;
     }
 
-    /** Doubles the size of the array and copies all current elements.*/
-    private void resize(boolean increase_size) {
-        // TODO: Implement resizing.
+    private void increaseSize(int factor) {
+        key[] temp = (key[])new Object[items.length*factor];
+        System.arraycopy(items, nextFirst+1, temp, temp.length-nextFirst- 1, items.length-nextFirst -1);
+        System.arraycopy(items, 0, temp, 0, nextLast);
+        nextFirst = temp.length-nextFirst-2;
+        items = temp;
+    }
+
+    private void decreaseSize(int factor) {
+        key[] temp = (key[])new Object[items.length / factor];
+        if (nextFirst > nextLast) {
+            key[] temp2 = (key[])new Object[items.length];
+            System.arraycopy(items, nextFirst+1, temp2, 0, items.length-nextFirst-1);
+            System.arraycopy(items, 0, temp2, size-nextLast, nextLast);
+            System.arraycopy(temp2, 0, temp, 0, size);
+        } else {
+            System.arraycopy(items, nextFirst+1, temp, 0, nextLast-nextFirst);
+        }
+        nextFirst = temp.length - 1;
+        nextLast = size;
+        items = temp;
     }
 
     private int incrementBackwards(int i) {
         if (i == 0) {
-            return items.length;
+            return items.length-1;
         } else {
             return i-1;
         }
     }
 
     private int incrementForwards(int i) {
-        if (i == items.length) {
+        if (i == items.length-1) {
             return 0;
         } else {
             return i+1;
@@ -39,7 +54,7 @@ public class AList<key> {
     /** Adds item X to the front of the list.*/
     public void addFirst(key x) {
         if (nextFirst == nextLast) {
-            resize(true);
+            increaseSize(2);
         }
         items[nextFirst] = x;
         nextFirst = incrementBackwards(nextFirst);
@@ -49,7 +64,7 @@ public class AList<key> {
     /** Adds item X to the back of the list.*/
     public void addLast(key x) {
         if (nextFirst == nextLast) {
-            resize(true);
+            increaseSize(2);
         }
         items[nextLast] = x;
         nextLast = incrementForwards(nextLast);
@@ -58,6 +73,9 @@ public class AList<key> {
 
     /** Removes the first item from the list.*/
     public key removeFirst() {
+        if (size * 4 < items.length){
+            decreaseSize(2);
+        }
         key tempFirst = items[incrementForwards(nextFirst)];
         items[incrementForwards(nextFirst)] = null;
         nextFirst = incrementForwards(nextFirst);
@@ -67,6 +85,9 @@ public class AList<key> {
 
     /** Removes the last item from the list.*/
     public key removeLast() {
+        if (size * 4 <= items.length){
+            decreaseSize(2);
+        }
         key tempLast = items[incrementBackwards(nextLast)];
         items[incrementBackwards(nextLast)] = null;
         nextLast = incrementBackwards(nextLast);

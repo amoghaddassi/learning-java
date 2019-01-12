@@ -55,11 +55,23 @@ public class AListTest {
     }
 
     @Test
-    public void resize() {
+    public void increaseSize() {
         AList<Integer> L = new AList<>();
-        for (int i =0; i < 100; i++) {
+        for (int i =0; i < 10; i++) {
             L.addLast(i);
         }
-        assert(L.get(90) == 90);
+        assert(L.get(9) == 8);
+    }
+
+    @Test
+    public void decreaseSize() {
+        AList<Integer> L = new AList<>();
+        for (int i=0; i<100; i++) {
+            L.addLast(i);
+        }
+        for (int j=0; j<70; j++) {
+            L.removeLast();
+        }
+        System.out.println(L);
     }
 }
